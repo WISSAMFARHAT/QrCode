@@ -1,0 +1,68 @@
+﻿@page "/"
+@inject IJSRuntime JS
+
+<HeadContent>
+    <CloudHead Title="index" />
+    @*    <CloudBundle Source="css/index.css" />*@
+</HeadContent>
+
+
+<section>
+    <div class="qr">
+        <div class="qr-use">
+            <div>
+                <button class="@(Type==0?"_active":"")" @onclick="()=>Type=0">
+                    <Qrcode.Shared.Icon.VSCard />
+                </button>
+                <button class="@(Type==1?"_active":"")" @onclick="()=>Type=1">
+                    <Qrcode.Shared.Icon.Url />
+                </button>
+            </div>
+            <div>
+                <button class="--button _primary" @onclick="Download">Download As SVG</button>
+            </div>
+        </div>
+        <div class="qr-form">
+            @if (Type == 0)
+            {
+                <div>
+                    <div class="--input">
+                        <span>Name:</span>
+                        <input type="text" @bind-value="@Name" spellcheck="false" />
+                    </div>
+                    <div class="--input">
+                        <span>phone:</span>
+                        <input type="text" @bind-value="@Phone" spellcheck="false" />
+                    </div>
+                    <div class="--input">
+                        <span>Email:</span>
+                        <input type="text" @bind-value="@email" spellcheck="false" />
+                    </div>
+                    <div class="--input">
+                        <span>Work:</span>
+                        <input type="text" @bind-value="Work" spellcheck="false" />
+                    </div>
+                </div>
+            }
+            else if (Type == 1)
+            {
+                <div>
+                    <div class="--input _url">
+                        <span>Url:</span>
+                        <input type="text" @bind-value="@Url" spellcheck="false" />
+                    </div>
+                </div>
+            }
+            <div class="qr-submit">
+                <button class="--button _primary" @onclick="Generate">Generate</button>
+            </div>
+        </div>
+    </div>
+</section>
+
+<section>
+    <div class="view">
+        @Ms
+    </div>
+</section>
+
